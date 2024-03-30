@@ -1,2 +1,2 @@
 # desuwa
- 4chan API wrapper written in c++ 
+simple 4chan api wrapper written in c++ 
