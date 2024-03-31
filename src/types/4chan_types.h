@@ -30,7 +30,7 @@ struct board_t {
     //auto refresh ( ) -> void;
 
     explicit board_t ( ) {
-        std::cerr << "no board provided" <<std::endl;
+        throw std::invalid_argument ( "no board provided" );
     }
 
     explicit board_t ( const std::string& board ) : board ( board ) { 
