@@ -9,11 +9,11 @@ int main ( ) {
         return 1;
     }
 
-    /* test board implementation*/
-    board_t literature;
+    /* setup and grab all threads on /lit/ board */
+    auto lit = std::make_unique<board_t> ( "lit" );
 
-    /* grabs all threads on /lit/ board */
-    literature.init ( "lit" );
+    /* empty init ( error ) */
+    /* auto tech = std::make_unique<board_t> ( ); */
 
     /* cleanup */
     curl_easy_cleanup ( reader::curl );

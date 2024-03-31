@@ -1,5 +1,6 @@
 #pragma once
 #include "../main.h"
+#include "../reader/reader.h"
 
 struct reply_t {
 
@@ -25,8 +26,18 @@ struct board_t {
 
     /* threads */
     std::vector<thread_t> threads;
+ 
+    //auto refresh ( ) -> void;
 
-    auto init ( const std::string board) -> void;
+    explicit board_t ( ) {
+        std::cerr << "no board provided" <<std::endl;
+    }
+
+    explicit board_t ( const std::string& board ) : board ( board ) { 
+        if ( board.empty ( ) or not reader::grab_board_threads ( board , this->raw_json ) ) {
+            throw std::invalid_argument ( "improper board provided" );
+        }
+    }
 
 private:
     std::string raw_json;
