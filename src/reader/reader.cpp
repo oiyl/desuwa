@@ -20,7 +20,7 @@ auto reader::grab_thread ( std::string board , int num , std::string& result ) -
     res = curl_easy_perform ( curl );
     if ( res != CURLE_OK ) {
         std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror ( res ) << std::endl;
-        return 1;
+        return 0;
     }
 
     /* 404 checking ( invalid board, usually. ) */
@@ -29,9 +29,9 @@ auto reader::grab_thread ( std::string board , int num , std::string& result ) -
     if ( response_code == 404 ) {
         std::cerr << board << "/thread/" << num << " : 404 not found" << std::endl;
         curl_easy_cleanup ( curl );
-        return 1;
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
 auto reader::grab_board_threads ( std::string board , std::string& result ) -> bool {
@@ -49,7 +49,7 @@ auto reader::grab_board_threads ( std::string board , std::string& result ) -> b
     res = curl_easy_perform ( curl );
     if ( res != CURLE_OK ) {
         std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror ( res ) << std::endl;
-        return 1;
+        return 0;
     }
 
     /* 404 checking ( invalid board, usually. ) */
@@ -58,7 +58,7 @@ auto reader::grab_board_threads ( std::string board , std::string& result ) -> b
     if ( response_code == 404 ) {
         std::cerr << board << " : 404 not found" << std::endl;
         curl_easy_cleanup ( curl );
-        return 1;
+        return 0;
     }
-    return 0;
+    return 1;
 }
