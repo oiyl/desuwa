@@ -8,16 +8,19 @@ struct reply_t {
 
 struct thread_t {
     /* OP identifying number */
-    size_t num;
-
-    /* page on index */
-    size_t index_page;
+    unsigned int num;
 
     /* UNIX timestamp of last modification */
     time_t timestamp;
 
     /* amount of replies */
-    size_t replies;
+    uint16_t replies;
+
+    thread_t ( unsigned int a , time_t b , uint16_t c ) : num ( a ) , timestamp ( b ) , replies ( c ) {
+
+    }
+
+
 };
 
 struct board_t {
@@ -26,20 +29,22 @@ struct board_t {
 
     /* threads */
     std::vector<thread_t> threads;
- 
+
     //auto refresh ( ) -> void;
 
     explicit board_t ( ) {
         throw std::invalid_argument ( "no board provided" );
     }
 
-    explicit board_t ( const std::string& board ) : board ( board ) { 
+    explicit board_t ( const std::string& board ) {
         if ( board.empty ( ) or not reader::grab_board_threads ( board , this->raw_json ) ) {
             throw std::invalid_argument ( "improper board provided" );
         }
+        init_threads ( );
     }
 
 private:
     std::string raw_json;
-};
 
+    void init_threads ( );
+};
