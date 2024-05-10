@@ -14,13 +14,14 @@ struct thread_t {
     time_t timestamp;
 
     /* amount of replies */
-    uint16_t replies;
+    uint16_t reply_amount;
+
+    /* replies */
+    std::vector<reply_t> replies;
 
     thread_t ( unsigned int a , time_t b , uint16_t c ) : num ( a ) , timestamp ( b ) , replies ( c ) {
 
     }
-
-
 };
 
 struct board_t {
