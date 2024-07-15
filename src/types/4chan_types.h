@@ -2,50 +2,82 @@
 #include "../main.h"
 #include "../reader/reader.h"
 
-struct reply_t {
+struct data {
+	std::string of_boards;
+};
+inline data g_data { };
 
+struct reply_t {
+	unsigned int num;
+	time_t timestamp;
+	std::string content;
+
+	reply_t ( ) { }
+
+	reply_t ( unsigned int a, time_t b, std::string c ) : num ( a ), timestamp ( b ), content ( c ) {
+		this->num       = a;
+		this->timestamp = b;
+		this->content   = c;
+	}
 };
 
 struct thread_t {
-    /* OP identifying number */
-    unsigned int num;
+	/* OP identifying number */
+	unsigned int num;
 
-    /* UNIX timestamp of last modification */
-    time_t timestamp;
+	/* UNIX timestamp of last modification */
+	time_t timestamp;
 
-    /* amount of replies */
-    uint16_t reply_amount;
+	/* amount of replies */
+	uint16_t reply_amount;
 
-    /* replies */
-    std::vector<reply_t> replies;
+	/* replies */
+	std::vector< std::unique_ptr< reply_t > > replies;
 
-    thread_t ( unsigned int a , time_t b , uint16_t c ) : num ( a ) , timestamp ( b ) , replies ( c ) {
+	explicit thread_t ( std::string board, int number ) {
+		this->raw_json = g_reader.grab_thread ( board, number );
+		init_replies ( );
+	}
 
-    }
+private:
+
+	/* raw data downloaded */
+	std::string raw_json; /* should be converted to file system eventually */
+
+	void init_replies ( );
 };
 
 struct board_t {
-    /* board (/g/) */
-    std::string board;
+	/* board */
+	std::string board;
 
-    /* threads */
-    std::vector<thread_t> threads;
+	/* thread numbers */
+	std::vector< int > thread_numbers;
 
-    //auto refresh ( ) -> void;
+	// auto refresh ( ) -> void;
 
-    explicit board_t ( ) {
-        throw std::invalid_argument ( "no board provided" );
-    }
+	auto get_all_threads ( ) {
+		return this->thread_numbers;
+	}
 
-    explicit board_t ( const std::string& board ) {
-        if ( board.empty ( ) or not reader::grab_board_threads ( board , this->raw_json ) ) {
-            throw std::invalid_argument ( "improper board provided" );
-        }
-        init_threads ( );
-    }
+	explicit board_t ( ) {
+		throw std::invalid_argument ( "no board provided" );
+	}
+
+	explicit board_t ( const std::string& board ) {
+		if ( board.empty ( ) ) {
+			throw std::invalid_argument ( "improper board provided" );
+		}
+		this->board    = board;
+		this->raw_json = g_reader.grab_board_threads ( "lit" );
+
+		init_threads ( );
+	}
 
 private:
-    std::string raw_json;
 
-    void init_threads ( );
+	/* raw data downloaded */
+	std::string raw_json; /* should be converted to file system eventually */
+
+	auto init_threads ( ) -> void;
 };
