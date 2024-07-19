@@ -1,12 +1,8 @@
 #pragma once
 
-
 #include "../desuwa.h"
 
 struct board_t {
-	
-	
-
 	explicit board_t ( ) {
 		throw std::invalid_argument ( "no board provided" );
 	}
@@ -33,14 +29,10 @@ struct board_t {
 	/* thread numbers */
 	std::vector< int > thread_numbers;
 
-	
-
 private:
 
 	auto init_threads ( ) -> void;
 
 	/* raw data downloaded */
 	std::string raw_json; /* should be converted to file system eventually */
-
-	
 };

@@ -13,8 +13,6 @@ struct thread_t {
 
 	auto get_reply ( size_t index ) -> reply_t&;
 
-
-
 	/* OP identifying number */
 	unsigned int num;
 
@@ -33,6 +31,4 @@ private:
 
 	/* raw data downloaded */
 	std::string raw_json; /* should be converted to file system eventually */
-
-	
 };

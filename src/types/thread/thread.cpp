@@ -1,6 +1,6 @@
 #include "thread.h"
 
-auto thread_t::get_reply ( size_t index ) -> reply_t& { 
+auto thread_t::get_reply ( size_t index ) -> reply_t& {
 	return *replies.at ( index );
 }
 
