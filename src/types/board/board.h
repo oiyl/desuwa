@@ -4,12 +4,7 @@
 #include "../desuwa.h"
 
 struct board_t {
-	/* board */
-	std::string board;
-
-	/* thread numbers */
-	std::vector< int > thread_numbers;
-
+	
 	// auto refresh ( ) -> void;
 
 	auto get_all_threads ( ) {
@@ -30,10 +25,20 @@ struct board_t {
 		init_threads ( );
 	}
 
+	/* board */
+	std::string board;
+
+	/* thread numbers */
+	std::vector< int > thread_numbers;
+
+	
+
 private:
+
+	auto init_threads ( ) -> void;
 
 	/* raw data downloaded */
 	std::string raw_json; /* should be converted to file system eventually */
 
-	auto init_threads ( ) -> void;
+	
 };
