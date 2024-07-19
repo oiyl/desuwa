@@ -141,15 +141,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\types\4chan_types.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\reader\reader.cpp" />
+    <ClCompile Include="src\types\board\board.cpp" />
+    <ClCompile Include="src\types\reply\reply.cpp" />
+    <ClCompile Include="src\types\thread\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dep\json.hpp" />
-    <ClInclude Include="src\types\4chan_types.h" />
+    <ClInclude Include="src\types\desuwa.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\reader\reader.h" />
+    <ClInclude Include="src\types\board\board.h" />
+    <ClInclude Include="src\types\reply\reply.h" />
+    <ClInclude Include="src\types\thread\thread.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\test.json" />

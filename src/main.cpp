@@ -1,5 +1,6 @@
 #include "reader/reader.h"
-#include "types/4chan_types.h"
+#include "types/board/board.h"
+#include "types/thread/thread.h"
 
 int main ( ) {
 	/* init curl */
@@ -14,7 +15,10 @@ int main ( ) {
 	auto lit = std::make_unique< board_t > ( "lit" );
 
 	/* grab specified thread and populate replies */
-	auto test = std::make_unique< thread_t > ( lit->board, 23593325 );
+	auto test_thread = std::make_unique< thread_t > ( lit->board, 23593325 );
+
+	/* get the first reply */
+	std::cout << test_thread->get_reply ( 0 ).content;
 
 	/* empty init ( error ) */
 	/* auto tech = std::make_unique<board_t> ( ); */
