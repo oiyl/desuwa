@@ -9,7 +9,11 @@ struct thread_t {
 		init_replies ( );
 	}
 
+	~thread_t ( ) { };
+
 	auto get_reply ( size_t index ) -> reply_t&;
+
+
 
 	/* OP identifying number */
 	unsigned int num;

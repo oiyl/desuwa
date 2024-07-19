@@ -5,11 +5,7 @@
 
 struct board_t {
 	
-	// auto refresh ( ) -> void;
-
-	auto get_all_threads ( ) {
-		return this->thread_numbers;
-	}
+	
 
 	explicit board_t ( ) {
 		throw std::invalid_argument ( "no board provided" );
@@ -23,6 +19,12 @@ struct board_t {
 		this->raw_json = g_reader.grab_board_threads ( "lit" );
 
 		init_threads ( );
+	}
+
+	/* auto refresh ( ) -> void; */
+
+	auto get_all_threads ( ) {
+		return this->thread_numbers;
 	}
 
 	/* board */

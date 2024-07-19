@@ -31,9 +31,6 @@ int main ( ) {
 	/* get the first reply */
 	std::cout << test_thread->get_reply ( 0 ).content << std::endl;
 
-	/* empty init ( error ) */
-	/* auto tech = std::make_unique<board_t> ( ); */
-
 	/* cleanup */
 	curl_easy_cleanup ( g_reader.curl );
 

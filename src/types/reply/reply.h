@@ -11,6 +11,8 @@ struct reply_t {
 		this->content   = c;
 	}
 
+	~reply_t ( ) { };
+
 	unsigned int num;
 	time_t timestamp;
 	std::string content;
