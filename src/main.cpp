@@ -9,8 +9,8 @@ auto load_board ( const std::string& name ) {
 	return std::make_unique< board_t > ( name );
 }
 
-auto load_thread ( std::unique_ptr< board_t > board, size_t num ) {
-	return std::make_unique< thread_t > ( board->board, num );
+auto load_thread ( std::string board, size_t num ) {
+	return std::make_unique< thread_t > ( board, num );
 }
 
 int main ( ) {
@@ -26,7 +26,7 @@ int main ( ) {
 	auto lit = load_board ( "lit" );
 
 	/* grab specified thread and populate replies */
-	auto test_thread = load_thread ( std::move ( lit ), 23593325 );
+	auto test_thread = load_thread ( "lit" , 23593325 ); 
 
 	/* get the first reply */
 	std::cout << test_thread->get_reply ( 0 ).content << std::endl;

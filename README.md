@@ -7,7 +7,7 @@
 auto lit = load_board ( "lit" );
 
 /* grab specified thread and populate replies */
-auto test_thread = load_thread( std::move(lit), 23593325 );
+auto test_thread = load_thread ( "lit" , 23593325 ); 
 
 /* get the first reply */
 std::cout << test_thread->get_reply ( 0 ).content << std::endl;
